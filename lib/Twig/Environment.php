@@ -648,8 +648,10 @@ class Twig_Environment
 
     public function addExtension(Twig_ExtensionInterface $extension)
     {
-        $this->extensionSet->addExtension($extension);
-        $this->updateOptionsHash();
+        if (!$this->hasExtension(get_class($extension))) {
+            $this->extensionSet->addExtension($extension);
+            $this->updateOptionsHash();
+        }
     }
 
     /**
